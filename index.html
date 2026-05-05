@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Prepositions - تعلم حروف الجر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gradient: linear-gradient(135deg, #4361ee 0%, #3f37c9 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: var(--gradient);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(67, 97, 238, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header .arabic-title {
+            font-family: 'Noto Naskh Arabic', serif;
+            font-size: 1.8rem;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            background: white;
+            padding: 1rem;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-tab {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            background: #e9ecef;
+            color: var(--dark);
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-tab:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-tab.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.4);
+        }
+
+        /* Sections */
+        .section {
+            display: none;
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid var(--primary);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .card .prep-word {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .card .arabic-meaning {
+            font-family: 'Noto Naskh Arabic', serif;
+            font-size: 1.4rem;
+            color: var(--secondary);
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .card .usage-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--warning);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .card .usage-list {
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+
+        .card .usage-list li {
+            padding: 0.3rem 0;
+            font-size: 0.95rem;
+            color: #555;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .card .usage-list li:last-child {
+            border-bottom: none;
+        }
+
+        .card .usage-list li::before {
+            content: '✓ ';
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .card .example {
+            background: #f0f4ff;
+            padding: 0.8rem;
+            border-radius: 10px;
+            margin-top: 0.5rem;
+            font-style: italic;
+            border-right: 3px solid var(--accent);
+        }
+
+        .card .example-ar {
+            font-family: 'Noto Naskh Arabic', serif;
+            color: #666;
+            font-size: 0.95rem;
+            margin-top: 0.3rem;
+        }
+
+        /* Exercise Styles */
+        .exercise-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 1.5rem;
+        }
+
+        .question {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .question .blank {
+            display: inline-block;
+            min-width: 80px;
+            border-bottom: 2px dashed var(--primary);
+            text-align: center;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .options {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .option-btn {
+            padding: 0.6rem 1.2rem;
+            border: 2px solid var(--primary);
+            background: white;
+            color: var(--primary);
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .option-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .option-btn.correct {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+
+        .option-btn.wrong {
+            background: var(--danger);
+            border-color: var(--danger);
+            color: white;
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .feedback {
+            padding: 0.8rem;
+            border-radius: 10px;
+            margin-top: 0.5rem;
+            display: none;
+            font-weight: 600;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .feedback.wrong {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Drag and Drop Game */
+        .drop-zone {
+            min-height: 50px;
+            border: 3px dashed var(--primary);
+            border-radius: 15px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 0.3rem;
+            padding: 0.3rem 1rem;
+            background: #f0f4ff;
+            transition: all 0.3s ease;
+            min-width: 100px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .drop-zone.drag-over {
+            background: #d4edda;
+            border-color: var(--success);
+        }
+
+        .drop-zone.filled {
+            border-style: solid;
+        }
+
+        .draggables-container {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+
+        .draggable {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            cursor: grab;
+            font-weight: 600;
+            user-select: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 3px 10px rgba(67, 97, 238, 0.3);
+        }
+
+        .draggable:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        }
+
+        .draggable:active {
+            cursor: grabbing;
+        }
+
+        .draggable.dragging {
+            opacity: 0.5;
+        }
+
+        .draggable.used {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Matching Game */
+        .matching-game {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .match-item {
+            padding: 1rem;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .match-item:hover {
+            border-color: var(--primary);
+            background: #f0f4ff;
+            transform: scale(1.02);
+        }
+
+        .match-item.selected {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.4);
+        }
+
+        .match-item.matched {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+            cursor: default;
+            animation: matchPop 0.4s ease;
+        }
+
+        @keyframes matchPop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .match-item.wrong-match {
+            animation: shake 0.5s ease;
+            border-color: var(--danger);
+            background: #f8d7da;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        /* Score Board */
+        .score-board {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            font-weight: 700;
+            color: var(--primary);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .score-board .star {
+            color: #ffc107;
+            font-size: 1.2rem;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        /* Fill in the Blank */
+        .fill-blank-input {
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            padding: 0.5rem 1rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            width: 120px;
+            text-align: center;
+            outline: none;
+        }
+
+        .fill-blank-input:focus {
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .check-btn {
+            padding: 0.6rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-left: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .check-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        /* Timer */
+        .timer {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--warning);
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .nav-tabs {
+                padding: 0.5rem;
+            }
+
+            .nav-tab {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .matching-game {
+                grid-template-columns: 1fr;
+            }
+
+            .score-board {
+                top: auto;
+                bottom: 20px;
+                right: 10px;
+                left: 10px;
+                justify-content: center;
+            }
+        }
+
+        /* Celebration */
+        .celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            display: none;
+        }
+
+        .celebration.active {
+            display: block;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            animation: confetti-fall 3s ease-out forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Category badges */
+        .category-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: var(--accent);
+            color: white;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Hint button */
+        .hint-btn {
+            background: #ffc107;
+            color: #212529;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .hint-btn:hover {
+            background: #e0a800;
+            transform: scale(1.05);
+        }
+
+        .hint-text {
+            display: none;
+            color: #666;
+            font-style: italic;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background: #fff3cd;
+            border-radius: 8px;
+            font-family: 'Noto Naskh Arabic', serif;
+        }
+
+        .hint-text.show {
+            display: block;
+        }
+
+        /* Completion message */
+        .completion-msg {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .completion-msg h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .completion-msg p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .completion-msg .arabic {
+            font-family: 'Noto Naskh Arabic', serif;
+            color: #666;
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="celebration" id="celebration"></div>
+
+    <div class="score-board">
+        <span class="star">⭐</span>
+        <span>Score: <span id="score">0</span></span>
+    </div>
+
+    <header class="header">
+        <h1>English Prepositions</h1>
+        <div class="arabic-title">تعلم حروف الجر الإنجليزية</div>
+    </header>
+
+    <nav class="nav-tabs">
+        <button class="nav-tab active" onclick="showSection('learn')">📚 Learn - تعلم</button>
+        <button class="nav-tab" onclick="showSection('exercise1')">✏️ Fill Blank - املأ الفراغ</button>
+        <button class="nav-tab" onclick="showSection('exercise2')">🎯 Multiple Choice - اختيار متعدد</button>
+        <button class="nav-tab" onclick="showSection('matching')">🧩 Matching - توصيل</button>
+        <button class="nav-tab" onclick="showSection('dragdrop')">🎮 Drag & Drop - سحب وإفلات</button>
+    </nav>
+
+    <!-- LEARN SECTION -->
+    <section id="learn" class="section active">
+        <h2 class="section-title">Common Prepositions - حروف الجر الشائعة</h2>
+
+        <div class="card-grid">
+            <div class="card">
+                <span class="category-badge">Place & Time - مكان وزمان</span>
+                <div class="prep-word">In</div>
+                <div class="arabic-meaning">في / داخل</div>
+                <div class="usage-title">When to use - متى تستخدم:</div>
+                <ul class="usage-list">
+                    <li>Inside something closed (rooms, buildings, boxes)</li>
+                    <li>Months, years, seasons, centuries</li>
+                    <li>Parts of the day (in the morning)</li>
+                    <li>Countries and cities</li>
+                </ul>
+                <div class="example">"The cat is in the box"</div>
+                <div class="example-ar">القطة في الصندوق</div>
+                <div class="example">"I was born in 2000"</div>
+                <div class="example-ar">ولدت في عام 2000</div>
+            </div>
+
+            <div class="card">
+                <span class="category-badge">Place & Time - مكان وزمان</span>
+                <div class="prep-word">On</div>
+                <div class="arabic-meaning">على</div>
+                <div class="usage-title">When to use - متى تستخدم:</div>
+                <ul class="usage-list">
+                    <li>Touching a surface (table, wall, floor)</li>
+                    <li>Days of the week (on Monday)</li>
+                    <li>Dates (on June 5th)</li>
+                    <li>Special days (on Christmas)</li>
+                </ul>
+                <div class="example">"The book is on the table"</div>
+                <div class="example-ar">الكتاب على الطاولة</div>
+                <div class="example">"The meeting is on Monday"</div>
+                <div class="example-ar">الاجتماع يوم الاثنين</div>
+            </div>
+
+            <div class="card">
+                <span class="category-badge">Place - مكان</span>
+                <div class="prep-word">Under</div>
+                <div class="arabic-meaning">تحت</div>
+                <div class="usage-title">When to use - متى تستخدم:</div>
+                <ul class="usage-list">
+                    <li>Below something, covered by it</li>
+                    <li>Less than a number or age</li>
+                    <li>Controlled or governed by</li>
+                </ul>
+                <div class="example">"The dog is under the bed"</div>
+                <div class="example-ar">الكلب تحت السرير</div>
+                <div class="example">"Children under 5 get free tickets"</div>
+                <div class="example-ar">الأطفال تحت سن 5 يحصلون على تذاكر مجانية</div>
+            </div>
+
+            <div class="card">
+                <span class="category-badge">Place - مكان</span>
+                <div class="prep-word">Behind</div>
+                <div class="arabic-meaning">خلف</div>
+                <div class="usage-title">When to use - متى تستخدم:</div>
+                <ul class="usage-list">
+                    <li>At the back of something</li>
+                    <li>Supporting someone secretly</li>
+                    <li>Responsible for something (behind the idea)</li>
+                </ul>
+                <div class="example">"The car is behind the house"</div>
+                <div class="example-ar">السيارة خلف المنزل</div>
+                <div class="example">"Who is behind this project?"</div>
+                <div class="example-ar">من وراء هذا المشروع؟</div>
+            </div>
+
+            <div class="card">
+                <span class="category-badge">Time - زمان</span>
+                <div class="prep-word">At</div>
+                <div class="arabic-meaning">في (للوقت الدقيق)</div>
+                <div class="usage-title">When to use - متى تستخدم:</div>
+                <ul class="usage-list">
+                    <li>Exact time (at 5 o'clock)</li>
+                    <li>Specific points (at noon, at night)</li>
+                    <li>Addresses with numbers (at 123 Main St)</li>
+                    <li>Events (at the party, at work)</li>
+                </ul>
+                <div class="example">"I wake up at 7 o'clock"</div>
+                <div class="example-ar">أستيقظ في الساعة السابعة</div>
+                <div class="example">"She is at school now"</div>
+                <div class="example-ar">هي في المدرسة الآن</div>
+            </div>
+
+            <div class="card">
+                <span class="category-badge">Direction - اتجاه</span>
+                <div class="prep-word">To</div>
+                <div class="arabic-meaning">إلى</div>
+                <div class="usage-title">When to use - متى تستخدم:</div>
+                <ul class="usage-list">
+                    <li>Movement toward a place</li>
+                    <li>Giving something to someone</li>
+                    <li>Time (ten to five = 4:50)</li>
+                    <li>Comparisons (prefer A to B)</li>
+                </ul>
+                <div class="example">"I go to school every day"</div>
+                <div class="example-ar">أذهب إلى المدرسة كل يوم</div>
+                <div class="example">"Give this letter to your teacher"</div>
+                <div class="example-ar">أعطِ هذه الرسالة إلى معلمك</div>
+            </div>
+
+            <div class="card">
+                <span class="category-badge">Purpose - غرض</span>
+                <div class="prep-word">For</div>
+                <div class="arabic-meaning">لـ / لأجل</div>
+                <div class="usage-title">When to use - متى تستخدم:</div>
+                <ul class="usage-list">
+                    <li>Purpose or reason (for studying)</li>
+                    <li>Duration (for two hours)</li>
+                    <li>Intended recipient (for you)</li>
+                    <li>Exchange (pay $5 for coffee)</li>
+                </ul>
+                <div class="example">"This gift is for you"</div>
+                <div class="example-ar">هذه الهدية لك</div>
+                <div class="example">"I studied for three hours"</div>
+                <div class="example-ar">درست لمدة ثلاث ساعات</div>
+            </div>
+
+            <div class="card">
+                <span class="category-badge">Topic - موضوع</span>
+                <div class="prep-word">About</div>
+                <div class="arabic-meaning">حول / عن</div>
+                <div class="usage-title">When to use - متى تستخدم:</div>
+                <ul class="usage-list">
+                    <li>Subject or topic of discussion</li>
+                    <li>Approximately (about 10 people)</li>
+                    <li>Concerned with (worried about)</li>
+                    <li>Doing something (busy about)</li>
+                </ul>
+                <div class="example">"We talked about the lesson"</div>
+                <div class="example-ar">تحدثنا عن الدرس</div>
+                <div class="example">"There were about 50 students"</div>
+                <div class="example-ar">كان هناك حوالي 50 طالباً</div>
+            </div>
+
+            <div class="card">
+                <span class="category-badge">Company - مصاحبة</span>
+                <div class="prep-word">With</div>
+                <div class="arabic-meaning">مع</div>
+                <div class="usage-title">When to use - متى تستخدم:</div>
+                <ul class="usage-list">
+                    <li>Accompanied by someone</li>
+                    <li>Using a tool (cut with a knife)</li>
+                    <li>Having a quality (a man with courage)</li>
+                    <li>Agreement (agree with you)</li>
+                </ul>
+                <div class="example">"I study with my friend"</div>
+                <div class="example-ar">أدرس مع صديقي</div>
+                <div class="example">"Write with a pen"</div>
+                <div class="example-ar">اكتب بقلم</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXERCISE 1: FILL IN THE BLANK -->
+    <section id="exercise1" class="section">
+        <h2 class="section-title">Fill in the Blank - املأ الفراغ</h2>
+        <div class="progress-container">
+            <div class="progress-bar" id="progress1" style="width: 0%"></div>
+        </div>
+
+        <div id="fillBlankContainer"></div>
+    </section>
+
+    <!-- EXERCISE 2: MULTIPLE CHOICE -->
+    <section id="exercise2" class="section">
+        <h2 class="section-title">Multiple Choice - اختيار من متعدد</h2>
+        <div class="progress-container">
+            <div class="progress-bar" id="progress2" style="width: 0%"></div>
+        </div>
+
+        <div id="mcqContainer"></div>
+    </section>
+
+    <!-- MATCHING GAME -->
+    <section id="matching" class="section">
+        <h2 class="section-title">Matching Game - لعبة التوصيل</h2>
+        <p style="text-align: center; margin-bottom: 1rem; color: #666;">
+            Click on an English preposition, then click on its Arabic meaning.<br>
+            انقر على حرف الجر الإنجليزي، ثم انقر على معناه بالعربية.
+        </p>
+        <div class="timer" id="matchingTimer">Time: 60s</div>
+        <div class="matching-game" id="matchingGame"></div>
+    </section>
+
+    <!-- DRAG AND DROP -->
+    <section id="dragdrop" class="section">
+        <h2 class="section-title">Drag & Drop - سحب وإفلات</h2>
+        <p style="text-align: center; margin-bottom: 1rem; color: #666;">
+            Drag the correct preposition to complete the sentence.<br>
+            اسحب حرف الجر الصحيح لإكمال الجملة.
+        </p>
+        <div id="dragDropContainer"></div>
+    </section>
+
+    <script>
+        let score = 0;
+        let currentSection = 'learn';
+        let fillBlankIndex = 0;
+        let mcqIndex = 0;
+        let matchedPairs = 0;
+        let selectedItem = null;
+        let matchingTime = 60;
+        let matchingTimerInterval;
+
+        // Data - using only: in, on, under, behind, at, to, for, about, with
+        const fillBlankQuestions = [
+            { sentence: "The cat is ___ the box.", answer: "in", hint: "داخل", arabic: "القطة في الصندوق" },
+            { sentence: "The book is ___ the table.", answer: "on", hint: "على", arabic: "الكتاب على الطاولة" },
+            { sentence: "The dog is ___ the bed.", answer: "under", hint: "تحت", arabic: "الكلب تحت السرير" },
+            { sentence: "The car is ___ the house.", answer: "behind", hint: "خلف", arabic: "السيارة خلف المنزل" },
+            { sentence: "I wake up ___ 7 o'clock.", answer: "at", hint: "في (وقت)", arabic: "أستيقظ في الساعة السابعة" },
+            { sentence: "I go ___ school every day.", answer: "to", hint: "إلى", arabic: "أذهب إلى المدرسة كل يوم" },
+            { sentence: "This gift is ___ you.", answer: "for", hint: "لأجل", arabic: "هذه الهدية لك" },
+            { sentence: "We talked ___ the lesson.", answer: "about", hint: "حول", arabic: "تحدثنا عن الدرس" },
+            { sentence: "I study ___ my friend.", answer: "with", hint: "مع", arabic: "أدرس مع صديقي" },
+            { sentence: "The picture is ___ the wall.", answer: "on", hint: "على", arabic: "الصورة على الحائط" }
+        ];
+
+        const mcqQuestions = [
+            { question: "Where is the ball? It is ___ the box.", options: ["in", "on", "under", "behind"], answer: "in", arabic: "أين الكرة؟ إنها في الصندوق." },
+            { question: "The cat is sleeping ___ the bed.", options: ["in", "on", "under", "at"], answer: "on", arabic: "القطة تنام على السرير." },
+            { question: "I was born ___ 2005.", options: ["at", "on", "in", "for"], answer: "in", arabic: "ولدت في عام 2005." },
+            { question: "The car is ___ the house.", options: ["in front of", "behind", "between", "next to"], answer: "behind", arabic: "السيارة خلف المنزل." },
+            { question: "I study ___ my friend.", options: ["to", "with", "for", "about"], answer: "with", arabic: "أدرس مع صديقي." },
+            { question: "This gift is ___ you.", options: ["to", "for", "with", "about"], answer: "for", arabic: "هذه الهدية لك." },
+            { question: "We talked ___ the lesson.", options: ["for", "with", "about", "to"], answer: "about", arabic: "تحدثنا عن الدرس." },
+            { question: "I go ___ school every day.", options: ["to", "for", "at", "in"], answer: "to", arabic: "أذهب إلى المدرسة كل يوم." },
+            { question: "I wake up ___ 7 o'clock.", options: ["in", "on", "at", "for"], answer: "at", arabic: "أستيقظ في الساعة السابعة." },
+            { question: "The dog is ___ the table.", options: ["in", "on", "under", "at"], answer: "under", arabic: "الكلب تحت الطاولة." }
+        ];
+
+        const matchingPairs = [
+            { en: "in", ar: "في / داخل" },
+            { en: "on", ar: "على" },
+            { en: "under", ar: "تحت" },
+            { en: "behind", ar: "خلف" },
+            { en: "at", ar: "في (وقت)" },
+            { en: "to", ar: "إلى" },
+            { en: "for", ar: "لأجل" },
+            { en: "about", ar: "حول" },
+            { en: "with", ar: "مع" }
+        ];
+
+        const dragDropQuestions = [
+            { sentence: "The keys are ___ the table.", answer: "on", options: ["in", "on", "under", "behind"], arabic: "المفاتيح على الطاولة." },
+            { sentence: "The bird is flying ___ the sky.", answer: "in", options: ["in", "on", "at", "to"], arabic: "الطائر يطير في السماء." },
+            { sentence: "I will wait ___ you.", answer: "for", options: ["to", "for", "with", "about"], arabic: "سأنتظرك." },
+            { sentence: "Please sit ___ me.", answer: "with", options: ["for", "with", "about", "to"], arabic: "من فضلك اجلس معي." },
+            { sentence: "The meeting starts ___ 9 AM.", answer: "at", options: ["in", "on", "at", "for"], arabic: "الاجتماع يبدأ في الساعة 9 صباحاً." }
+        ];
+
+        // Navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            // Remove active from all tabs
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+
+            // Show selected section
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('active');
+            }
+
+            // Find and activate the clicked tab
+            const tabs = document.querySelectorAll('.nav-tab');
+            for (let tab of tabs) {
+                if (tab.getAttribute('onclick') && tab.getAttribute('onclick').includes("'" + sectionId + "'")) {
+                    tab.classList.add('active');
+                }
+            }
+
+            currentSection = sectionId;
+
+            if (sectionId === 'exercise1') initFillBlank();
+            if (sectionId === 'exercise2') initMCQ();
+            if (sectionId === 'matching') initMatching();
+            if (sectionId === 'dragdrop') initDragDrop();
+        }
+
+        function updateScore(points) {
+            score += points;
+            document.getElementById('score').textContent = score;
+            if (points > 0) createConfetti();
+        }
+
+        function createConfetti() {
+            const celebration = document.getElementById('celebration');
+            celebration.classList.add('active');
+            const colors = ['#4361ee', '#3f37c9', '#4895ef', '#4cc9f0', '#f72585', '#ffc107', '#28a745'];
+
+            for (let i = 0; i < 25; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                confetti.style.width = (Math.random() * 8 + 6) + 'px';
+                confetti.style.height = confetti.style.width;
+                celebration.appendChild(confetti);
+            }
+
+            setTimeout(() => {
+                celebration.innerHTML = '';
+                celebration.classList.remove('active');
+            }, 3000);
+        }
+
+        // Fill in the Blank
+        function initFillBlank() {
+            fillBlankIndex = 0;
+            document.getElementById('progress1').style.width = '0%';
+            renderFillBlankQuestion();
+        }
+
+        function renderFillBlankQuestion() {
+            const container = document.getElementById('fillBlankContainer');
+            if (fillBlankIndex >= fillBlankQuestions.length) {
+                container.innerHTML = `
+                    <div class="exercise-container completion-msg">
+                        <h2>🎉 Congratulations! - مبروك!</h2>
+                        <p>You completed all questions!<br><span class="arabic">أكملت جميع الأسئلة!</span></p>
+                        <button class="check-btn" onclick="initFillBlank()">Try Again - حاول مرة أخرى</button>
+                    </div>
+                `;
+                return;
+            }
+
+            const q = fillBlankQuestions[fillBlankIndex];
+            container.innerHTML = `
+                <div class="exercise-container">
+                    <div style="margin-bottom: 0.5rem; color: #888; font-size: 0.9rem;">Question ${fillBlankIndex + 1} of ${fillBlankQuestions.length}</div>
+                    <div class="question">
+                        ${q.sentence.replace('___', '<input type="text" class="fill-blank-input" id="fillInput" placeholder="?" autocomplete="off">')}
+                    </div>
+                    <div style="color: #666; margin-bottom: 1rem; font-family: 'Noto Naskh Arabic', serif;">${q.arabic}</div>
+                    <button class="hint-btn" onclick="showHint()">💡 Hint - تلميح</button>
+                    <button class="check-btn" onclick="checkFillBlank()">Check - تحقق</button>
+                    <div class="hint-text" id="hintText">${q.hint}</div>
+                    <div class="feedback" id="fillFeedback"></div>
+                </div>
+            `;
+
+            const input = document.getElementById('fillInput');
+            if (input) {
+                input.focus();
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') checkFillBlank();
+                });
+            }
+        }
+
+        function showHint() {
+            const hint = document.getElementById('hintText');
+            if (hint) hint.classList.add('show');
+        }
+
+        function checkFillBlank() {
+            const input = document.getElementById('fillInput');
+            const feedback = document.getElementById('fillFeedback');
+            if (!input || !feedback) return;
+
+            const answer = input.value.trim().toLowerCase();
+            const correct = fillBlankQuestions[fillBlankIndex].answer.toLowerCase();
+
+            if (answer === correct) {
+                feedback.textContent = '✅ Correct! - صحيح!';
+                feedback.className = 'feedback correct show';
+                input.style.borderColor = '#28a745';
+                updateScore(10);
+                fillBlankIndex++;
+                document.getElementById('progress1').style.width = (fillBlankIndex / fillBlankQuestions.length * 100) + '%';
+                setTimeout(renderFillBlankQuestion, 1500);
+            } else {
+                feedback.textContent = '❌ Try again! - حاول مرة أخرى!';
+                feedback.className = 'feedback wrong show';
+                input.style.borderColor = '#dc3545';
+                input.value = '';
+                input.focus();
+            }
+        }
+
+        // Multiple Choice
+        function initMCQ() {
+            mcqIndex = 0;
+            document.getElementById('progress2').style.width = '0%';
+            renderMCQQuestion();
+        }
+
+        function renderMCQQuestion() {
+            const container = document.getElementById('mcqContainer');
+            if (mcqIndex >= mcqQuestions.length) {
+                container.innerHTML = `
+                    <div class="exercise-container completion-msg">
+                        <h2>🎉 Great Job! - عمل رائع!</h2>
+                        <p>You completed all multiple choice questions!<br><span class="arabic">أكملت جميع أسئلة الاختيار من متعدد!</span></p>
+                        <button class="check-btn" onclick="initMCQ()">Try Again - حاول مرة أخرى</button>
+                    </div>
+                `;
+                return;
+            }
+
+            const q = mcqQuestions[mcqIndex];
+            container.innerHTML = `
+                <div class="exercise-container">
+                    <div style="margin-bottom: 0.5rem; color: #888; font-size: 0.9rem;">Question ${mcqIndex + 1} of ${mcqQuestions.length}</div>
+                    <div class="question">${q.question}</div>
+                    <div style="color: #666; margin-bottom: 1rem; font-family: 'Noto Naskh Arabic', serif;">${q.arabic}</div>
+                    <div class="options" id="mcqOptions">
+                        ${q.options.map(opt => `<button class="option-btn" onclick="checkMCQ('${opt}', this)">${opt}</button>`).join('')}
+                    </div>
+                    <div class="feedback" id="mcqFeedback"></div>
+                </div>
+            `;
+        }
+
+        function checkMCQ(selected, btn) {
+            const feedback = document.getElementById('mcqFeedback');
+            const correct = mcqQuestions[mcqIndex].answer;
+            const allBtns = document.querySelectorAll('#mcqOptions .option-btn');
+
+            allBtns.forEach(b => b.disabled = true);
+
+            if (selected === correct) {
+                btn.classList.add('correct');
+                feedback.textContent = '✅ Correct! - صحيح!';
+                feedback.className = 'feedback correct show';
+                updateScore(10);
+                mcqIndex++;
+                document.getElementById('progress2').style.width = (mcqIndex / mcqQuestions.length * 100) + '%';
+                setTimeout(renderMCQQuestion, 1500);
+            } else {
+                btn.classList.add('wrong');
+                feedback.textContent = `❌ Wrong! The correct answer is "${correct}" - خطأ! الإجابة الصحيحة هي "${correct}"`;
+                feedback.className = 'feedback wrong show';
+                allBtns.forEach(b => {
+                    if (b.textContent === correct) b.classList.add('correct');
+                });
+                setTimeout(() => {
+                    mcqIndex++;
+                    document.getElementById('progress2').style.width = (mcqIndex / mcqQuestions.length * 100) + '%';
+                    renderMCQQuestion();
+                }, 2000);
+            }
+        }
+
+        // Matching Game
+        function initMatching() {
+            matchedPairs = 0;
+            selectedItem = null;
+            matchingTime = 60;
+            document.getElementById('matchingTimer').textContent = 'Time: 60s';
+            clearInterval(matchingTimerInterval);
+
+            const game = document.getElementById('matchingGame');
+            game.innerHTML = '';
+
+            const shuffled = [...matchingPairs].sort(() => Math.random() - 0.5);
+            const enItems = shuffled.map((p, i) => ({ text: p.en, type: 'en', pair: i }));
+            const arItems = shuffled.map((p, i) => ({ text: p.ar, type: 'ar', pair: i }));
+
+            // Shuffle both separately
+            const shuffledEn = [...enItems].sort(() => Math.random() - 0.5);
+            const shuffledAr = [...arItems].sort(() => Math.random() - 0.5);
+
+            // Interleave them
+            const allItems = [];
+            for (let i = 0; i < shuffledEn.length; i++) {
+                allItems.push(shuffledEn[i]);
+                allItems.push(shuffledAr[i]);
+            }
+
+            allItems.forEach((item, idx) => {
+                const div = document.createElement('div');
+                div.className = 'match-item';
+                div.textContent = item.text;
+                div.dataset.pair = item.pair;
+                div.dataset.type = item.type;
+                div.dataset.idx = idx;
+                div.onclick = () => selectMatchItem(div);
+                game.appendChild(div);
+            });
+
+            matchingTimerInterval = setInterval(() => {
+                matchingTime--;
+                const timerEl = document.getElementById('matchingTimer');
+                if (timerEl) timerEl.textContent = `Time: ${matchingTime}s`;
+                if (matchingTime <= 0) {
+                    clearInterval(matchingTimerInterval);
+                    // FIXED LINE: Used template literal backticks so the single quote in "Time's up!" doesn't break the string.
+                    game.innerHTML = `<div style="grid-column: 1/-1; text-align: center; font-size: 1.5rem;">⏰ Time's up! - انتهى الوقت!<br><button class="check-btn" onclick="initMatching()" style="margin-top:1rem;">Try Again</button></div>`;
+                }
+            }, 1000);
+        }
+
+        function selectMatchItem(item) {
+            if (item.classList.contains('matched')) return;
+
+            if (!selectedItem) {
+                selectedItem = item;
+                item.classList.add('selected');
+            } else {
+                const prev = selectedItem;
+                selectedItem = null;
+
+                if (prev === item) {
+                    item.classList.remove('selected');
+                    return;
+                }
+
+                if (prev.dataset.pair === item.dataset.pair && prev.dataset.type !== item.dataset.type) {
+                    prev.classList.remove('selected');
+                    prev.classList.add('matched');
+                    item.classList.add('matched');
+                    matchedPairs++;
+                    updateScore(15);
+
+                    if (matchedPairs === matchingPairs.length) {
+                        clearInterval(matchingTimerInterval);
+                        setTimeout(() => {
+                            const game = document.getElementById('matchingGame');
+                            if (game) {
+                                game.innerHTML = `
+                                    <div style="grid-column: 1/-1; text-align: center;">
+                                        <h2 style="color: var(--primary);">🎉 Perfect! - ممتاز!</h2>
+                                        <p>You matched all pairs in ${60 - matchingTime} seconds!<br>طابقت جميع الأزواج في ${60 - matchingTime} ثانية!</p>
+                                        <button class="check-btn" onclick="initMatching()">Play Again - العب مرة أخرى</button>
+                                    </div>
+                                `;
+                            }
+                            createConfetti();
+                        }, 500);
+                    }
+                } else {
+                    prev.classList.remove('selected');
+                    prev.classList.add('wrong-match');
+                    item.classList.add('wrong-match');
+                    setTimeout(() => {
+                        prev.classList.remove('wrong-match');
+                        item.classList.remove('wrong-match');
+                    }, 500);
+                }
+            }
+        }
+
+        // Drag and Drop
+        function initDragDrop() {
+            const container = document.getElementById('dragDropContainer');
+            container.innerHTML = '';
+
+            dragDropQuestions.forEach((q, idx) => {
+                const div = document.createElement('div');
+                div.className = 'exercise-container';
+                div.dataset.answered = 'false';
+                div.innerHTML = `
+                    <div style="margin-bottom: 0.5rem; color: #888; font-size: 0.9rem;">Question ${idx + 1} of ${dragDropQuestions.length}</div>
+                    <div class="question">
+                        ${q.sentence.replace('___', '<span class="drop-zone" data-answer="' + q.answer + '" data-idx="' + idx + '">Drop here - أسقط هنا</span>')}
+                    </div>
+                    <div style="color: #666; margin-bottom: 1rem; font-family: 'Noto Naskh Arabic', serif;">${q.arabic}</div>
+                    <div class="draggables-container" id="ddOptions${idx}">
+                        ${q.options.map(opt => `<span class="draggable" draggable="true" data-value="${opt}" data-question="${idx}">${opt}</span>`).join('')}
+                    </div>
+                    <div class="feedback" id="ddFeedback${idx}"></div>
+                `;
+                container.appendChild(div);
+            });
+
+            // Add drag and drop event listeners
+            document.querySelectorAll('.draggable').forEach(drag => {
+                drag.addEventListener('dragstart', (e) => {
+                    e.dataTransfer.setData('text/plain', drag.dataset.value);
+                    e.dataTransfer.setData('question', drag.dataset.question);
+                    drag.classList.add('dragging');
+                });
+                drag.addEventListener('dragend', () => {
+                    drag.classList.remove('dragging');
+                });
+            });
+
+            document.querySelectorAll('.drop-zone').forEach(zone => {
+                zone.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    zone.classList.add('drag-over');
+                });
+                zone.addEventListener('dragleave', () => {
+                    zone.classList.remove('drag-over');
+                });
+                zone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    zone.classList.remove('drag-over');
+
+                    const value = e.dataTransfer.getData('text/plain');
+                    const questionIdx = e.dataTransfer.getData('question');
+                    const answer = zone.dataset.answer;
+                    const idx = zone.dataset.idx;
+                    const feedback = document.getElementById('ddFeedback' + idx);
+                    const containerDiv = zone.closest('.exercise-container');
+
+                    if (containerDiv.dataset.answered === 'true') return;
+
+                    zone.textContent = value;
+                    zone.classList.add('filled');
+
+                    if (value === answer) {
+                        zone.style.borderColor = '#28a745';
+                        zone.style.background = '#d4edda';
+                        zone.style.color = '#155724';
+                        feedback.textContent = '✅ Correct! - صحيح!';
+                        feedback.className = 'feedback correct show';
+                        updateScore(10);
+                    } else {
+                        zone.style.borderColor = '#dc3545';
+                        zone.style.background = '#f8d7da';
+                        zone.style.color = '#721c24';
+                        feedback.textContent = `❌ Wrong! The answer is "${answer}" - خطأ! الإجابة هي "${answer}"`;
+                        feedback.className = 'feedback wrong show';
+                    }
+
+                    containerDiv.dataset.answered = 'true';
+
+                    // Mark all draggables for this question as used
+                    document.querySelectorAll(`.draggable[data-question="${idx}"]`).forEach(d => {
+                        d.classList.add('used');
+                        d.draggable = false;
+                    });
+                });
+            });
+        }
+
+        // Initialize fill blank on page load (for when user first opens exercise1)
+        // But don't auto-init, let the nav click handle it
+    </script>
+</body>
+</html>
