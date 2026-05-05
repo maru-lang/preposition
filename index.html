@@ -227,15 +227,6 @@
             border-radius: 10px;
         }
 
-        .question .blank {
-            display: inline-block;
-            min-width: 80px;
-            border-bottom: 2px dashed var(--primary);
-            text-align: center;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
         .options {
             display: flex;
             gap: 1rem;
@@ -354,14 +345,6 @@
             box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
         }
 
-        .draggable:active {
-            cursor: grabbing;
-        }
-
-        .draggable.dragging {
-            opacity: 0.5;
-        }
-
         .draggable.used {
             opacity: 0.3;
             cursor: not-allowed;
@@ -373,7 +356,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
@@ -386,7 +369,13 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
+            white-space: pre-line;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80px;
+            line-height: 1.4;
         }
 
         .match-item:hover {
@@ -412,7 +401,7 @@
 
         @keyframes matchPop {
             0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
 
@@ -458,6 +447,10 @@
             border-radius: 4px;
             margin: 1rem 0;
             overflow: hidden;
+            position: sticky;
+            top: 80px;
+            z-index: 50;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .progress-bar {
@@ -511,63 +504,6 @@
             margin-bottom: 1rem;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8rem;
-            }
-
-            .nav-tabs {
-                padding: 0.5rem;
-            }
-
-            .nav-tab {
-                padding: 0.6rem 1rem;
-                font-size: 0.85rem;
-            }
-
-            .matching-game {
-                grid-template-columns: 1fr;
-            }
-
-            .score-board {
-                top: auto;
-                bottom: 20px;
-                right: 10px;
-                left: 10px;
-                justify-content: center;
-            }
-        }
-
-        /* Celebration */
-        .celebration {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1000;
-            display: none;
-        }
-
-        .celebration.active {
-            display: block;
-        }
-
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: var(--primary);
-            animation: confetti-fall 3s ease-out forwards;
-        }
-
-        @keyframes confetti-fall {
-            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
-        }
-
         /* Category badges */
         .category-badge {
             display: inline-block;
@@ -614,30 +550,48 @@
             display: block;
         }
 
-        /* Completion message */
-        .completion-msg {
-            text-align: center;
-            padding: 2rem;
+        /* Celebration */
+        .celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            display: none;
         }
 
-        .completion-msg h2 {
-            color: var(--primary);
-            font-size: 2rem;
-            margin-bottom: 1rem;
+        .celebration.active {
+            display: block;
         }
 
-        .completion-msg p {
-            font-size: 1.1rem;
-            color: #555;
-            margin-bottom: 1.5rem;
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            animation: confetti-fall 3s ease-out forwards;
         }
 
-        .completion-msg .arabic {
-            font-family: 'Noto Naskh Arabic', serif;
-            color: #666;
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .matching-game {
+                grid-template-columns: 1fr;
+            }
+            .score-board {
+                top: auto;
+                bottom: 20px;
+                right: 10px;
+                left: 10px;
+                justify-content: center;
+            }
         }
     </style>
-<base target="_blank">
 </head>
 <body>
     <div class="celebration" id="celebration"></div>
@@ -660,7 +614,7 @@
         <button class="nav-tab" onclick="showSection('dragdrop')">🎮 Drag & Drop - سحب وإفلات</button>
     </nav>
 
-    <!-- LEARN SECTION -->
+    <!-- SECTION: LEARN -->
     <section id="learn" class="section active">
         <h2 class="section-title">Common Prepositions - حروف الجر الشائعة</h2>
 
@@ -669,185 +623,196 @@
                 <span class="category-badge">Place & Time - مكان وزمان</span>
                 <div class="prep-word">In</div>
                 <div class="arabic-meaning">في / داخل</div>
-                <div class="usage-title">When to use - متى تستخدم:</div>
+                <div class="usage-title">When to use:</div>
                 <ul class="usage-list">
-                    <li>Inside something closed (rooms, buildings, boxes)</li>
-                    <li>Months, years, seasons, centuries</li>
-                    <li>Parts of the day (in the morning)</li>
+                    <li>Inside something closed</li>
+                    <li>Months, years, seasons</li>
                     <li>Countries and cities</li>
                 </ul>
                 <div class="example">"The cat is in the box"</div>
                 <div class="example-ar">القطة في الصندوق</div>
                 <div class="example">"I was born in 2000"</div>
                 <div class="example-ar">ولدت في عام 2000</div>
+                <div class="example">"We live in London"</div>
+                <div class="example-ar">نحن نعيش في لندن</div>
             </div>
 
             <div class="card">
                 <span class="category-badge">Place & Time - مكان وزمان</span>
                 <div class="prep-word">On</div>
                 <div class="arabic-meaning">على</div>
-                <div class="usage-title">When to use - متى تستخدم:</div>
+                <div class="usage-title">When to use:</div>
                 <ul class="usage-list">
-                    <li>Touching a surface (table, wall, floor)</li>
-                    <li>Days of the week (on Monday)</li>
-                    <li>Dates (on June 5th)</li>
-                    <li>Special days (on Christmas)</li>
+                    <li>Touching a surface</li>
+                    <li>Days of the week</li>
+                    <li>Dates</li>
                 </ul>
                 <div class="example">"The book is on the table"</div>
                 <div class="example-ar">الكتاب على الطاولة</div>
                 <div class="example">"The meeting is on Monday"</div>
                 <div class="example-ar">الاجتماع يوم الاثنين</div>
+                <div class="example">"The picture is on the wall"</div>
+                <div class="example-ar">الصورة على الحائط</div>
             </div>
 
             <div class="card">
                 <span class="category-badge">Place - مكان</span>
                 <div class="prep-word">Under</div>
                 <div class="arabic-meaning">تحت</div>
-                <div class="usage-title">When to use - متى تستخدم:</div>
+                <div class="usage-title">When to use:</div>
                 <ul class="usage-list">
                     <li>Below something, covered by it</li>
                     <li>Less than a number or age</li>
-                    <li>Controlled or governed by</li>
                 </ul>
                 <div class="example">"The dog is under the bed"</div>
                 <div class="example-ar">الكلب تحت السرير</div>
                 <div class="example">"Children under 5 get free tickets"</div>
-                <div class="example-ar">الأطفال تحت سن 5 يحصلون على تذاكر مجانية</div>
+                <div class="example-ar">الأطفال تحت سن 5 مجاناً</div>
+                <div class="example">"Your shoes are under the chair"</div>
+                <div class="example-ar">حذاؤك تحت الكرسي</div>
             </div>
 
             <div class="card">
                 <span class="category-badge">Place - مكان</span>
                 <div class="prep-word">Behind</div>
                 <div class="arabic-meaning">خلف</div>
-                <div class="usage-title">When to use - متى تستخدم:</div>
+                <div class="usage-title">When to use:</div>
                 <ul class="usage-list">
                     <li>At the back of something</li>
-                    <li>Supporting someone secretly</li>
-                    <li>Responsible for something (behind the idea)</li>
                 </ul>
                 <div class="example">"The car is behind the house"</div>
                 <div class="example-ar">السيارة خلف المنزل</div>
-                <div class="example">"Who is behind this project?"</div>
-                <div class="example-ar">من وراء هذا المشروع؟</div>
+                <div class="example">"He hid behind the door"</div>
+                <div class="example-ar">اختبأ خلف الباب</div>
+                <div class="example">"Look behind you!"</div>
+                <div class="example-ar">انظر خلفك!</div>
             </div>
 
             <div class="card">
                 <span class="category-badge">Time - زمان</span>
                 <div class="prep-word">At</div>
                 <div class="arabic-meaning">في (للوقت الدقيق)</div>
-                <div class="usage-title">When to use - متى تستخدم:</div>
+                <div class="usage-title">When to use:</div>
                 <ul class="usage-list">
-                    <li>Exact time (at 5 o'clock)</li>
-                    <li>Specific points (at noon, at night)</li>
-                    <li>Addresses with numbers (at 123 Main St)</li>
-                    <li>Events (at the party, at work)</li>
+                    <li>Exact time</li>
+                    <li>Specific points/events</li>
                 </ul>
                 <div class="example">"I wake up at 7 o'clock"</div>
                 <div class="example-ar">أستيقظ في الساعة السابعة</div>
                 <div class="example">"She is at school now"</div>
                 <div class="example-ar">هي في المدرسة الآن</div>
+                <div class="example">"Look at the picture"</div>
+                <div class="example-ar">انظر إلى الصورة</div>
             </div>
 
             <div class="card">
                 <span class="category-badge">Direction - اتجاه</span>
                 <div class="prep-word">To</div>
                 <div class="arabic-meaning">إلى</div>
-                <div class="usage-title">When to use - متى تستخدم:</div>
+                <div class="usage-title">When to use:</div>
                 <ul class="usage-list">
                     <li>Movement toward a place</li>
                     <li>Giving something to someone</li>
-                    <li>Time (ten to five = 4:50)</li>
-                    <li>Comparisons (prefer A to B)</li>
                 </ul>
                 <div class="example">"I go to school every day"</div>
                 <div class="example-ar">أذهب إلى المدرسة كل يوم</div>
                 <div class="example">"Give this letter to your teacher"</div>
-                <div class="example-ar">أعطِ هذه الرسالة إلى معلمك</div>
+                <div class="example-ar">أعطِ هذه الرسالة لمعلمك</div>
+                <div class="example">"Welcome to Morocco"</div>
+                <div class="example-ar">مرحباً بك في المغرب</div>
             </div>
 
             <div class="card">
                 <span class="category-badge">Purpose - غرض</span>
                 <div class="prep-word">For</div>
                 <div class="arabic-meaning">لـ / لأجل</div>
-                <div class="usage-title">When to use - متى تستخدم:</div>
+                <div class="usage-title">When to use:</div>
                 <ul class="usage-list">
-                    <li>Purpose or reason (for studying)</li>
-                    <li>Duration (for two hours)</li>
-                    <li>Intended recipient (for you)</li>
-                    <li>Exchange (pay $5 for coffee)</li>
+                    <li>Purpose or reason</li>
+                    <li>Intended recipient</li>
                 </ul>
                 <div class="example">"This gift is for you"</div>
                 <div class="example-ar">هذه الهدية لك</div>
                 <div class="example">"I studied for three hours"</div>
                 <div class="example-ar">درست لمدة ثلاث ساعات</div>
+                <div class="example">"Thank you for your help"</div>
+                <div class="example-ar">شكراً لك على مساعدتك</div>
             </div>
 
             <div class="card">
                 <span class="category-badge">Topic - موضوع</span>
                 <div class="prep-word">About</div>
                 <div class="arabic-meaning">حول / عن</div>
-                <div class="usage-title">When to use - متى تستخدم:</div>
+                <div class="usage-title">When to use:</div>
                 <ul class="usage-list">
                     <li>Subject or topic of discussion</li>
-                    <li>Approximately (about 10 people)</li>
-                    <li>Concerned with (worried about)</li>
-                    <li>Doing something (busy about)</li>
+                    <li>Approximately</li>
                 </ul>
                 <div class="example">"We talked about the lesson"</div>
                 <div class="example-ar">تحدثنا عن الدرس</div>
                 <div class="example">"There were about 50 students"</div>
                 <div class="example-ar">كان هناك حوالي 50 طالباً</div>
+                <div class="example">"Tell me about your family"</div>
+                <div class="example-ar">حدثني عن عائلتك</div>
             </div>
 
             <div class="card">
                 <span class="category-badge">Company - مصاحبة</span>
                 <div class="prep-word">With</div>
                 <div class="arabic-meaning">مع</div>
-                <div class="usage-title">When to use - متى تستخدم:</div>
+                <div class="usage-title">When to use:</div>
                 <ul class="usage-list">
                     <li>Accompanied by someone</li>
-                    <li>Using a tool (cut with a knife)</li>
-                    <li>Having a quality (a man with courage)</li>
-                    <li>Agreement (agree with you)</li>
+                    <li>Using a tool</li>
                 </ul>
                 <div class="example">"I study with my friend"</div>
                 <div class="example-ar">أدرس مع صديقي</div>
                 <div class="example">"Write with a pen"</div>
                 <div class="example-ar">اكتب بقلم</div>
+                <div class="example">"I agree with you"</div>
+                <div class="example-ar">أنا أتفق معك</div>
             </div>
         </div>
     </section>
 
-    <!-- EXERCISE 1: FILL IN THE BLANK -->
+    <!-- SECTION: FILL IN THE BLANK -->
     <section id="exercise1" class="section">
         <h2 class="section-title">Fill in the Blank - املأ الفراغ</h2>
+        <p style="text-align: center; margin-bottom: 1rem; color: #666;">
+            Read each sentence carefully and type the correct preposition in the box.<br>
+            اقرأ كل جملة بعناية واكتب حرف الجر الصحيح في المربع.
+        </p>
         <div class="progress-container">
             <div class="progress-bar" id="progress1" style="width: 0%"></div>
         </div>
         <div id="fillBlankContainer"></div>
     </section>
 
-    <!-- EXERCISE 2: MULTIPLE CHOICE -->
+    <!-- SECTION: MULTIPLE CHOICE -->
     <section id="exercise2" class="section">
         <h2 class="section-title">Multiple Choice - اختيار من متعدد</h2>
+        <p style="text-align: center; margin-bottom: 1rem; color: #666;">
+            Choose the correct preposition from the options below.<br>
+            اختر حرف الجر الصحيح من الخيارات أدناه.
+        </p>
         <div class="progress-container">
             <div class="progress-bar" id="progress2" style="width: 0%"></div>
         </div>
         <div id="mcqContainer"></div>
     </section>
 
-    <!-- MATCHING GAME -->
+    <!-- SECTION: MATCHING -->
     <section id="matching" class="section">
         <h2 class="section-title">Matching Game - لعبة التوصيل</h2>
         <p style="text-align: center; margin-bottom: 1rem; color: #666;">
-            Click on an English preposition, then click on its Arabic meaning.<br>
-            انقر على حرف الجر الإنجليزي، ثم انقر على معناه بالعربية.
+            Match the English preposition with its correct Use & Example.<br>
+            قم بتوصيل حرف الجر الإنجليزي بالاستخدام والمثال الصحيح له.
         </p>
-        <div class="timer" id="matchingTimer">Time: 60s</div>
+        <div class="timer" id="matchingTimer">Time: 90s</div>
         <div class="matching-game" id="matchingGame"></div>
     </section>
 
-    <!-- DRAG AND DROP -->
+    <!-- SECTION: DRAG & DROP -->
     <section id="dragdrop" class="section">
         <h2 class="section-title">Drag & Drop - سحب وإفلات</h2>
         <p style="text-align: center; margin-bottom: 1rem; color: #666;">
@@ -858,40 +823,37 @@
     </section>
 
     <script>
+        // Global Variables
         let score = 0;
-        let fillBlankIndex = 0;
-        let mcqIndex = 0;
         let matchedPairs = 0;
         let selectedItem = null;
-        let matchingTime = 60;
+        let matchingTime = 90;
         let matchingTimerInterval;
-        let matchingInitialized = false;
 
-        // Expanded to 20 questions
+        // Data Arrays
         const fillBlankQuestions = [
-            { sentence: "The cat is ___ the box.", answer: "in", hint: "داخل", arabic: "القطة في الصندوق" },
-            { sentence: "The book is ___ the table.", answer: "on", hint: "على", arabic: "الكتاب على الطاولة" },
-            { sentence: "The dog is ___ the bed.", answer: "under", hint: "تحت", arabic: "الكلب تحت السرير" },
-            { sentence: "The car is ___ the house.", answer: "behind", hint: "خلف", arabic: "السيارة خلف المنزل" },
-            { sentence: "I wake up ___ 7 o'clock.", answer: "at", hint: "في (وقت)", arabic: "أستيقظ في الساعة السابعة" },
-            { sentence: "I go ___ school every day.", answer: "to", hint: "إلى", arabic: "أذهب إلى المدرسة كل يوم" },
-            { sentence: "This gift is ___ you.", answer: "for", hint: "لأجل", arabic: "هذه الهدية لك" },
-            { sentence: "We talked ___ the lesson.", answer: "about", hint: "حول", arabic: "تحدثنا عن الدرس" },
-            { sentence: "I study ___ my friend.", answer: "with", hint: "مع", arabic: "أدرس مع صديقي" },
-            { sentence: "The picture is ___ the wall.", answer: "on", hint: "على", arabic: "الصورة على الحائط" },
-            { sentence: "The keys are ___ the table.", answer: "on", hint: "على", arabic: "المفاتيح على الطاولة." },
-            { sentence: "We are swimming ___ the pool.", answer: "in", hint: "في / داخل", arabic: "نحن نسبح في المسبح." },
-            { sentence: "He hid ___ the door.", answer: "behind", hint: "خلف", arabic: "اختبأ خلف الباب." },
-            { sentence: "The shoes are ___ the bed.", answer: "under", hint: "تحت", arabic: "الأحذية تحت السرير." },
-            { sentence: "I will meet you ___ the station.", answer: "at", hint: "في (مكان)", arabic: "سأقابلك في المحطة." },
-            { sentence: "She gave the apple ___ her teacher.", answer: "to", hint: "إلى", arabic: "أعطت التفاحة لمعلمتها." },
-            { sentence: "This cake is ___ my brother.", answer: "for", hint: "لأجل", arabic: "هذه الكعكة لأخي." },
-            { sentence: "What are you talking ___?", answer: "about", hint: "عن / حول", arabic: "عمّ تتحدث؟" },
-            { sentence: "I want to go ___ you.", answer: "with", hint: "مع", arabic: "أريد الذهاب معك." },
-            { sentence: "There is a spider ___ the ceiling.", answer: "on", hint: "على", arabic: "يوجد عنكبوت على السقف." }
+            { sentence: "The cat is ___ the box.", answer: "in", hint: "Inside something", arabic: "القطة في الصندوق" },
+            { sentence: "The book is ___ the table.", answer: "on", hint: "Touching a surface", arabic: "الكتاب على الطاولة" },
+            { sentence: "The dog is ___ the bed.", answer: "under", hint: "Below something", arabic: "الكلب تحت السرير" },
+            { sentence: "The car is ___ the house.", answer: "behind", hint: "At the back", arabic: "السيارة خلف المنزل" },
+            { sentence: "I wake up ___ 7 o'clock.", answer: "at", hint: "Exact time", arabic: "أستيقظ في الساعة السابعة" },
+            { sentence: "I go ___ school every day.", answer: "to", hint: "Movement toward", arabic: "أذهب إلى المدرسة كل يوم" },
+            { sentence: "This gift is ___ you.", answer: "for", hint: "Intended recipient", arabic: "هذه الهدية لك" },
+            { sentence: "We talked ___ the lesson.", answer: "about", hint: "Topic", arabic: "تحدثنا عن الدرس" },
+            { sentence: "I study ___ my friend.", answer: "with", hint: "Accompanied by", arabic: "أدرس مع صديقي" },
+            { sentence: "The picture is ___ the wall.", answer: "on", hint: "Surface", arabic: "الصورة على الحائط" },
+            { sentence: "The keys are ___ the table.", answer: "on", hint: "Surface", arabic: "المفاتيح على الطاولة." },
+            { sentence: "We are swimming ___ the pool.", answer: "in", hint: "Inside", arabic: "نحن نسبح في المسبح." },
+            { sentence: "He hid ___ the door.", answer: "behind", hint: "At the back", arabic: "اختبأ خلف الباب." },
+            { sentence: "The shoes are ___ the bed.", answer: "under", hint: "Below", arabic: "الأحذية تحت السرير." },
+            { sentence: "I will meet you ___ the station.", answer: "at", hint: "Specific point", arabic: "سأقابلك في المحطة." },
+            { sentence: "She gave the apple ___ her teacher.", answer: "to", hint: "Movement toward", arabic: "أعطت التفاحة لمعلمتها." },
+            { sentence: "This cake is ___ my brother.", answer: "for", hint: "Intended recipient", arabic: "هذه الكعكة لأخي." },
+            { sentence: "What are you talking ___?", answer: "about", hint: "Topic", arabic: "عمّ تتحدث؟" },
+            { sentence: "I want to go ___ you.", answer: "with", hint: "Accompanied by", arabic: "أريد الذهاب معك." },
+            { sentence: "There is a spider ___ the ceiling.", answer: "on", hint: "Surface", arabic: "يوجد عنكبوت على السقف." }
         ];
 
-        // Expanded to 20 questions
         const mcqQuestions = [
             { question: "Where is the ball? It is ___ the box.", options: ["in", "on", "under", "behind"], answer: "in", arabic: "أين الكرة؟ إنها في الصندوق." },
             { question: "The cat is sleeping ___ the bed.", options: ["in", "on", "under", "at"], answer: "on", arabic: "القطة تنام على السرير." },
@@ -915,19 +877,19 @@
             { question: "Someone is standing ___ you.", options: ["in", "behind", "to", "for"], answer: "behind", arabic: "شخص ما يقف خلفك." }
         ];
 
+        // UPDATED: Matching Pairs now use definitions and examples
         const matchingPairs = [
-            { en: "in", ar: "في / داخل" },
-            { en: "on", ar: "على" },
-            { en: "under", ar: "تحت" },
-            { en: "behind", ar: "خلف" },
-            { en: "at", ar: "في (وقت)" },
-            { en: "to", ar: "إلى" },
-            { en: "for", ar: "لأجل" },
-            { en: "about", ar: "حول" },
-            { en: "with", ar: "مع" }
+            { term: "in", definition: "Inside a closed space\n(e.g., The cat is ___ the box)" },
+            { term: "on", definition: "Touching a surface\n(e.g., The book is ___ the table)" },
+            { term: "under", definition: "Below something\n(e.g., The dog is ___ the bed)" },
+            { term: "behind", definition: "At the back of\n(e.g., The car is ___ the house)" },
+            { term: "at", definition: "Exact time / Specific point\n(e.g., I wake up ___ 7 o'clock)" },
+            { term: "to", definition: "Movement toward\n(e.g., Go ___ school)" },
+            { term: "for", definition: "Purpose / Duration\n(e.g., This is ___ you)" },
+            { term: "about", definition: "Topic / Subject\n(e.g., Talk ___ the lesson)" },
+            { term: "with", definition: "Accompanied by / Using\n(e.g., Study ___ my friend)" }
         ];
 
-        // Expanded to 10 questions
         const dragDropQuestions = [
             { sentence: "The keys are ___ the table.", answer: "on", options: ["in", "on", "under", "behind"], arabic: "المفاتيح على الطاولة." },
             { sentence: "The bird is flying ___ the sky.", answer: "in", options: ["in", "on", "at", "to"], arabic: "الطائر يطير في السماء." },
@@ -941,40 +903,37 @@
             { sentence: "I made this cake ___ you.", answer: "for", options: ["to", "for", "with", "about"], arabic: "صنعت هذه الكعكة لأجلك." }
         ];
 
-        // Load content immediately so there are no empty sections
+        // Initialization
         document.addEventListener('DOMContentLoaded', () => {
-            initFillBlank();
-            initMCQ();
+            initFillBlankList();
+            initMCQList();
             initDragDrop();
-            // Matching waits until tab click so the timer doesn't run down secretly
         });
 
-        // Navigation
+        // Tab Switching
         function showSection(sectionId) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
 
-            const section = document.getElementById(sectionId);
-            if (section) section.classList.add('active');
+            document.getElementById(sectionId).classList.add('active');
 
             const tabs = document.querySelectorAll('.nav-tab');
             for (let tab of tabs) {
-                if (tab.getAttribute('onclick') && tab.getAttribute('onclick').includes(`'${sectionId}'`)) {
+                if (tab.getAttribute('onclick') && tab.getAttribute('onclick').includes(sectionId)) {
                     tab.classList.add('active');
                 }
             }
 
             // Start matching timer only when the tab is visited for the first time
-            if (sectionId === 'matching' && !matchingInitialized) {
+            if (sectionId === 'matching' && document.getElementById('matchingGame').innerHTML === '') {
                 initMatching();
-                matchingInitialized = true;
             }
         }
 
+        // Score & Confetti
         function updateScore(points) {
             score += points;
             document.getElementById('score').textContent = score;
-            if (points > 0) createConfetti();
         }
 
         function createConfetti() {
@@ -982,7 +941,7 @@
             celebration.classList.add('active');
             const colors = ['#4361ee', '#3f37c9', '#4895ef', '#4cc9f0', '#f72585', '#ffc107', '#28a745'];
 
-            for (let i = 0; i < 25; i++) {
+            for (let i = 0; i < 30; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
                 confetti.style.left = Math.random() * 100 + '%';
@@ -1000,186 +959,153 @@
             }, 3000);
         }
 
-        // Fill in the Blank
-        function initFillBlank() {
-            fillBlankIndex = 0;
-            document.getElementById('progress1').style.width = '0%';
-            renderFillBlankQuestion();
-        }
-
-        function renderFillBlankQuestion() {
+        // --- FILL IN THE BLANK LOGIC (ALL 20 AT ONCE) ---
+        function initFillBlankList() {
             const container = document.getElementById('fillBlankContainer');
-            if (fillBlankIndex >= fillBlankQuestions.length) {
-                container.innerHTML = `
-                    <div class="exercise-container completion-msg">
-                        <h2>🎉 Congratulations! - مبروك!</h2>
-                        <p>You completed all 20 questions!<br><span class="arabic">أكملت جميع الـ 20 سؤالاً!</span></p>
-                        <button class="check-btn" onclick="initFillBlank()">Play Again - العب مرة أخرى</button>
-                    </div>
-                `;
-                return;
-            }
-
-            const q = fillBlankQuestions[fillBlankIndex];
-            container.innerHTML = `
-                <div class="exercise-container">
-                    <div style="margin-bottom: 0.5rem; color: #888; font-size: 0.9rem;">Question ${fillBlankIndex + 1} of ${fillBlankQuestions.length}</div>
-                    <div class="question">
-                        ${q.sentence.replace('___', '<input type="text" class="fill-blank-input" id="fillInput" placeholder="?" autocomplete="off">')}
-                    </div>
+            container.innerHTML = '';
+            document.getElementById('progress1').style.width = '0%';
+            
+            fillBlankQuestions.forEach((q, idx) => {
+                const div = document.createElement('div');
+                div.className = 'exercise-container';
+                div.innerHTML = `
+                    <div class="question"><strong>${idx + 1}.</strong> ${q.sentence.replace('___', `<input type="text" class="fill-blank-input" id="fillInput${idx}" autocomplete="off">`)}</div>
                     <div style="color: #666; margin-bottom: 1rem; font-family: 'Noto Naskh Arabic', serif;">${q.arabic}</div>
-                    <button class="hint-btn" onclick="showHint()">💡 Hint - تلميح</button>
-                    <button class="check-btn" onclick="checkFillBlank()">Check - تحقق</button>
-                    <div class="hint-text" id="hintText">${q.hint}</div>
-                    <div class="feedback" id="fillFeedback"></div>
-                </div>
-            `;
-
-            const input = document.getElementById('fillInput');
-            if (input) {
-                input.focus();
-                input.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') checkFillBlank();
-                });
-            }
+                    <button class="hint-btn" onclick="document.getElementById('hintText${idx}').classList.toggle('show')">💡 Hint</button>
+                    <button class="check-btn" onclick="checkSingleFillBlank(${idx})">Check</button>
+                    <div class="hint-text" id="hintText${idx}">${q.hint}</div>
+                    <div class="feedback" id="fillFeedback${idx}"></div>
+                `;
+                container.appendChild(div);
+            });
         }
 
-        function showHint() {
-            const hint = document.getElementById('hintText');
-            if (hint) hint.classList.add('show');
-        }
-
-        function checkFillBlank() {
-            const input = document.getElementById('fillInput');
-            const feedback = document.getElementById('fillFeedback');
-            if (!input || !feedback) return;
+        function checkSingleFillBlank(idx) {
+            const input = document.getElementById('fillInput' + idx);
+            const feedback = document.getElementById('fillFeedback' + idx);
+            if (!input || input.disabled) return;
 
             const answer = input.value.trim().toLowerCase();
-            const correct = fillBlankQuestions[fillBlankIndex].answer.toLowerCase();
+            const correct = fillBlankQuestions[idx].answer.toLowerCase();
 
             if (answer === correct) {
-                feedback.textContent = '✅ Correct! - صحيح!';
+                feedback.textContent = '✅ Correct!';
                 feedback.className = 'feedback correct show';
                 input.style.borderColor = '#28a745';
+                input.style.backgroundColor = '#d4edda';
+                input.disabled = true;
                 updateScore(10);
-                fillBlankIndex++;
-                document.getElementById('progress1').style.width = (fillBlankIndex / fillBlankQuestions.length * 100) + '%';
-                setTimeout(renderFillBlankQuestion, 1500);
+                
+                // Update Progress
+                const totalCorrect = document.querySelectorAll('.fill-blank-input:disabled').length;
+                document.getElementById('progress1').style.width = (totalCorrect / fillBlankQuestions.length * 100) + '%';
+                
+                if (totalCorrect === fillBlankQuestions.length) {
+                    createConfetti();
+                }
             } else {
-                feedback.textContent = '❌ Try again! - حاول مرة أخرى!';
+                feedback.textContent = '❌ Try again!';
                 feedback.className = 'feedback wrong show';
                 input.style.borderColor = '#dc3545';
-                input.value = '';
-                input.focus();
             }
         }
 
-        // Multiple Choice
-        function initMCQ() {
-            mcqIndex = 0;
-            document.getElementById('progress2').style.width = '0%';
-            renderMCQQuestion();
-        }
-
-        function renderMCQQuestion() {
+        // --- MULTIPLE CHOICE LOGIC (ALL 20 AT ONCE) ---
+        function initMCQList() {
             const container = document.getElementById('mcqContainer');
-            if (mcqIndex >= mcqQuestions.length) {
-                container.innerHTML = `
-                    <div class="exercise-container completion-msg">
-                        <h2>🎉 Great Job! - عمل رائع!</h2>
-                        <p>You completed all 20 multiple choice questions!<br><span class="arabic">أكملت جميع أسئلة الاختيار من متعدد الـ 20!</span></p>
-                        <button class="check-btn" onclick="initMCQ()">Play Again - العب مرة أخرى</button>
-                    </div>
-                `;
-                return;
-            }
-
-            const q = mcqQuestions[mcqIndex];
-            container.innerHTML = `
-                <div class="exercise-container">
-                    <div style="margin-bottom: 0.5rem; color: #888; font-size: 0.9rem;">Question ${mcqIndex + 1} of ${mcqQuestions.length}</div>
-                    <div class="question">${q.question}</div>
+            container.innerHTML = '';
+            document.getElementById('progress2').style.width = '0%';
+            
+            mcqQuestions.forEach((q, idx) => {
+                const div = document.createElement('div');
+                div.className = 'exercise-container';
+                div.dataset.answered = 'false';
+                div.innerHTML = `
+                    <div class="question"><strong>${idx + 1}.</strong> ${q.question}</div>
                     <div style="color: #666; margin-bottom: 1rem; font-family: 'Noto Naskh Arabic', serif;">${q.arabic}</div>
-                    <div class="options" id="mcqOptions">
-                        ${q.options.map(opt => `<button class="option-btn" onclick="checkMCQ('${opt}', this)">${opt}</button>`).join('')}
+                    <div class="options" id="mcqOptions${idx}">
+                        ${q.options.map(opt => `<button class="option-btn" onclick="checkSingleMCQ(${idx}, '${opt}', this)">${opt}</button>`).join('')}
                     </div>
-                    <div class="feedback" id="mcqFeedback"></div>
-                </div>
-            `;
+                    <div class="feedback" id="mcqFeedback${idx}"></div>
+                `;
+                container.appendChild(div);
+            });
         }
 
-        function checkMCQ(selected, btn) {
-            const feedback = document.getElementById('mcqFeedback');
-            const correct = mcqQuestions[mcqIndex].answer;
-            const allBtns = document.querySelectorAll('#mcqOptions .option-btn');
+        function checkSingleMCQ(idx, selected, btn) {
+            const container = document.getElementById('mcqOptions' + idx).parentElement;
+            if (container.dataset.answered === 'true') return;
+
+            const feedback = document.getElementById('mcqFeedback' + idx);
+            const correct = mcqQuestions[idx].answer;
+            const allBtns = document.getElementById('mcqOptions' + idx).querySelectorAll('.option-btn');
 
             allBtns.forEach(b => b.disabled = true);
+            container.dataset.answered = 'true';
 
             if (selected === correct) {
                 btn.classList.add('correct');
-                feedback.textContent = '✅ Correct! - صحيح!';
+                feedback.textContent = '✅ Correct!';
                 feedback.className = 'feedback correct show';
                 updateScore(10);
-                mcqIndex++;
-                document.getElementById('progress2').style.width = (mcqIndex / mcqQuestions.length * 100) + '%';
-                setTimeout(renderMCQQuestion, 1500);
             } else {
                 btn.classList.add('wrong');
-                feedback.textContent = `❌ Wrong! The correct answer is "${correct}" - خطأ! الإجابة الصحيحة هي "${correct}"`;
+                feedback.textContent = `❌ Wrong! Correct answer: ${correct}`;
                 feedback.className = 'feedback wrong show';
                 allBtns.forEach(b => {
                     if (b.textContent === correct) b.classList.add('correct');
                 });
-                setTimeout(() => {
-                    mcqIndex++;
-                    document.getElementById('progress2').style.width = (mcqIndex / mcqQuestions.length * 100) + '%';
-                    renderMCQQuestion();
-                }, 2000);
+            }
+
+            // Update Progress
+            const totalAnswered = document.querySelectorAll('#mcqContainer .exercise-container[data-answered="true"]').length;
+            document.getElementById('progress2').style.width = (totalAnswered / mcqQuestions.length * 100) + '%';
+            
+            if (totalAnswered === mcqQuestions.length) {
+                createConfetti();
             }
         }
 
-        // Matching Game
+        // --- MATCHING GAME LOGIC ---
         function initMatching() {
             matchedPairs = 0;
             selectedItem = null;
-            matchingTime = 60;
-            document.getElementById('matchingTimer').textContent = 'Time: 60s';
+            matchingTime = 90; 
+            document.getElementById('matchingTimer').textContent = `Time: 90s`;
             clearInterval(matchingTimerInterval);
 
             const game = document.getElementById('matchingGame');
             game.innerHTML = '';
 
             const shuffled = [...matchingPairs].sort(() => Math.random() - 0.5);
-            const enItems = shuffled.map((p, i) => ({ text: p.en, type: 'en', pair: i }));
-            const arItems = shuffled.map((p, i) => ({ text: p.ar, type: 'ar', pair: i }));
+            const termItems = shuffled.map((p, i) => ({ text: p.term, type: 'term', pair: i }));
+            const defItems = shuffled.map((p, i) => ({ text: p.definition, type: 'def', pair: i }));
 
-            const shuffledEn = [...enItems].sort(() => Math.random() - 0.5);
-            const shuffledAr = [...arItems].sort(() => Math.random() - 0.5);
+            const shuffledTerms = [...termItems].sort(() => Math.random() - 0.5);
+            const shuffledDefs = [...defItems].sort(() => Math.random() - 0.5);
 
             const allItems = [];
-            for (let i = 0; i < shuffledEn.length; i++) {
-                allItems.push(shuffledEn[i]);
-                allItems.push(shuffledAr[i]);
+            for (let i = 0; i < shuffledTerms.length; i++) {
+                allItems.push(shuffledTerms[i]);
+                allItems.push(shuffledDefs[i]);
             }
 
-            allItems.forEach((item, idx) => {
+            allItems.forEach((item) => {
                 const div = document.createElement('div');
                 div.className = 'match-item';
                 div.textContent = item.text;
                 div.dataset.pair = item.pair;
                 div.dataset.type = item.type;
-                div.dataset.idx = idx;
                 div.onclick = () => selectMatchItem(div);
                 game.appendChild(div);
             });
 
             matchingTimerInterval = setInterval(() => {
                 matchingTime--;
-                const timerEl = document.getElementById('matchingTimer');
-                if (timerEl) timerEl.textContent = `Time: ${matchingTime}s`;
+                document.getElementById('matchingTimer').textContent = `Time: ${matchingTime}s`;
                 if (matchingTime <= 0) {
                     clearInterval(matchingTimerInterval);
-                    game.innerHTML = `<div style="grid-column: 1/-1; text-align: center; font-size: 1.5rem;">⏰ Time is up! - انتهى الوقت!<br><button class="check-btn" onclick="initMatching()" style="margin-top:1rem;">Try Again</button></div>`;
+                    game.innerHTML = `<div style="grid-column: 1/-1; text-align: center; font-size: 1.5rem;">⏰ Time is up!<br><button class="check-btn" onclick="initMatching()" style="margin-top:1rem;">Try Again</button></div>`;
                 }
             }, 1000);
         }
@@ -1209,16 +1135,12 @@
                     if (matchedPairs === matchingPairs.length) {
                         clearInterval(matchingTimerInterval);
                         setTimeout(() => {
-                            const game = document.getElementById('matchingGame');
-                            if (game) {
-                                game.innerHTML = `
-                                    <div style="grid-column: 1/-1; text-align: center;">
-                                        <h2 style="color: var(--primary);">🎉 Perfect! - ممتاز!</h2>
-                                        <p>You matched all pairs in ${60 - matchingTime} seconds!<br>طابقت جميع الأزواج في ${60 - matchingTime} ثانية!</p>
-                                        <button class="check-btn" onclick="initMatching()">Play Again - العب مرة أخرى</button>
-                                    </div>
-                                `;
-                            }
+                            document.getElementById('matchingGame').innerHTML = `
+                                <div style="grid-column: 1/-1; text-align: center;">
+                                    <h2 style="color: var(--primary);">🎉 Perfect!</h2>
+                                    <p>You matched all pairs!</p>
+                                    <button class="check-btn" onclick="initMatching()">Play Again</button>
+                                </div>`;
                             createConfetti();
                         }, 500);
                     }
@@ -1234,7 +1156,7 @@
             }
         }
 
-        // Drag and Drop
+        // --- DRAG AND DROP LOGIC ---
         function initDragDrop() {
             const container = document.getElementById('dragDropContainer');
             container.innerHTML = '';
@@ -1244,10 +1166,7 @@
                 div.className = 'exercise-container';
                 div.dataset.answered = 'false';
                 div.innerHTML = `
-                    <div style="margin-bottom: 0.5rem; color: #888; font-size: 0.9rem;">Question ${idx + 1} of ${dragDropQuestions.length}</div>
-                    <div class="question">
-                        ${q.sentence.replace('___', '<span class="drop-zone" data-answer="' + q.answer + '" data-idx="' + idx + '">Drop here - أسقط هنا</span>')}
-                    </div>
+                    <div class="question"><strong>${idx + 1}.</strong> ${q.sentence.replace('___', `<span class="drop-zone" data-answer="${q.answer}" data-idx="${idx}">Drop here</span>`)}</div>
                     <div style="color: #666; margin-bottom: 1rem; font-family: 'Noto Naskh Arabic', serif;">${q.arabic}</div>
                     <div class="draggables-container" id="ddOptions${idx}">
                         ${q.options.map(opt => `<span class="draggable" draggable="true" data-value="${opt}" data-question="${idx}">${opt}</span>`).join('')}
@@ -1257,26 +1176,18 @@
                 container.appendChild(div);
             });
 
-            // Add drag and drop event listeners
             document.querySelectorAll('.draggable').forEach(drag => {
                 drag.addEventListener('dragstart', (e) => {
                     e.dataTransfer.setData('text/plain', drag.dataset.value);
                     e.dataTransfer.setData('question', drag.dataset.question);
                     drag.classList.add('dragging');
                 });
-                drag.addEventListener('dragend', () => {
-                    drag.classList.remove('dragging');
-                });
+                drag.addEventListener('dragend', () => drag.classList.remove('dragging'));
             });
 
             document.querySelectorAll('.drop-zone').forEach(zone => {
-                zone.addEventListener('dragover', (e) => {
-                    e.preventDefault();
-                    zone.classList.add('drag-over');
-                });
-                zone.addEventListener('dragleave', () => {
-                    zone.classList.remove('drag-over');
-                });
+                zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('drag-over'); });
+                zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
                 zone.addEventListener('drop', (e) => {
                     e.preventDefault();
                     zone.classList.remove('drag-over');
@@ -1297,20 +1208,23 @@
                         zone.style.borderColor = '#28a745';
                         zone.style.background = '#d4edda';
                         zone.style.color = '#155724';
-                        feedback.textContent = '✅ Correct! - صحيح!';
+                        feedback.textContent = '✅ Correct!';
                         feedback.className = 'feedback correct show';
                         updateScore(10);
+                        
+                        // Check if all drag drops are done
+                        if(document.querySelectorAll('.drop-zone.filled[style*="border-color: rgb(40, 167, 69)"]').length === dragDropQuestions.length) {
+                            createConfetti();
+                        }
                     } else {
                         zone.style.borderColor = '#dc3545';
                         zone.style.background = '#f8d7da';
                         zone.style.color = '#721c24';
-                        feedback.textContent = `❌ Wrong! The answer is "${answer}" - خطأ! الإجابة هي "${answer}"`;
+                        feedback.textContent = `❌ Wrong! Answer: ${answer}`;
                         feedback.className = 'feedback wrong show';
                     }
 
                     containerDiv.dataset.answered = 'true';
-
-                    // Mark all draggables for this question as used
                     document.querySelectorAll(`.draggable[data-question="${idx}"]`).forEach(d => {
                         d.classList.add('used');
                         d.draggable = false;
