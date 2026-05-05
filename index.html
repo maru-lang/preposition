@@ -824,7 +824,6 @@
         <div class="progress-container">
             <div class="progress-bar" id="progress1" style="width: 0%"></div>
         </div>
-
         <div id="fillBlankContainer"></div>
     </section>
 
@@ -834,7 +833,6 @@
         <div class="progress-container">
             <div class="progress-bar" id="progress2" style="width: 0%"></div>
         </div>
-
         <div id="mcqContainer"></div>
     </section>
 
@@ -861,15 +859,15 @@
 
     <script>
         let score = 0;
-        let currentSection = 'learn';
         let fillBlankIndex = 0;
         let mcqIndex = 0;
         let matchedPairs = 0;
         let selectedItem = null;
         let matchingTime = 60;
         let matchingTimerInterval;
+        let matchingInitialized = false;
 
-        // Data - Expanded to 20 questions
+        // Expanded to 20 questions
         const fillBlankQuestions = [
             { sentence: "The cat is ___ the box.", answer: "in", hint: "داخل", arabic: "القطة في الصندوق" },
             { sentence: "The book is ___ the table.", answer: "on", hint: "على", arabic: "الكتاب على الطاولة" },
@@ -929,41 +927,48 @@
             { en: "with", ar: "مع" }
         ];
 
+        // Expanded to 10 questions
         const dragDropQuestions = [
             { sentence: "The keys are ___ the table.", answer: "on", options: ["in", "on", "under", "behind"], arabic: "المفاتيح على الطاولة." },
             { sentence: "The bird is flying ___ the sky.", answer: "in", options: ["in", "on", "at", "to"], arabic: "الطائر يطير في السماء." },
             { sentence: "I will wait ___ you.", answer: "for", options: ["to", "for", "with", "about"], arabic: "سأنتظرك." },
             { sentence: "Please sit ___ me.", answer: "with", options: ["for", "with", "about", "to"], arabic: "من فضلك اجلس معي." },
-            { sentence: "The meeting starts ___ 9 AM.", answer: "at", options: ["in", "on", "at", "for"], arabic: "الاجتماع يبدأ في الساعة 9 صباحاً." }
+            { sentence: "The meeting starts ___ 9 AM.", answer: "at", options: ["in", "on", "at", "for"], arabic: "الاجتماع يبدأ في الساعة 9 صباحاً." },
+            { sentence: "He hid the gift ___ his back.", answer: "behind", options: ["in", "on", "under", "behind"], arabic: "أخفى الهدية خلف ظهره." },
+            { sentence: "Let's talk ___ your project.", answer: "about", options: ["about", "to", "for", "with"], arabic: "لنتحدث عن مشروعك." },
+            { sentence: "She walked ___ the store.", answer: "to", options: ["at", "on", "to", "in"], arabic: "مشت إلى المتجر." },
+            { sentence: "The cat is hiding ___ the bed.", answer: "under", options: ["on", "in", "under", "about"], arabic: "القطة تختبئ تحت السرير." },
+            { sentence: "I made this cake ___ you.", answer: "for", options: ["to", "for", "with", "about"], arabic: "صنعت هذه الكعكة لأجلك." }
         ];
+
+        // Load content immediately so there are no empty sections
+        document.addEventListener('DOMContentLoaded', () => {
+            initFillBlank();
+            initMCQ();
+            initDragDrop();
+            // Matching waits until tab click so the timer doesn't run down secretly
+        });
 
         // Navigation
         function showSection(sectionId) {
-            // Hide all sections
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            // Remove active from all tabs
             document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
 
-            // Show selected section
             const section = document.getElementById(sectionId);
-            if (section) {
-                section.classList.add('active');
-            }
+            if (section) section.classList.add('active');
 
-            // Find and activate the clicked tab
             const tabs = document.querySelectorAll('.nav-tab');
             for (let tab of tabs) {
-                if (tab.getAttribute('onclick') && tab.getAttribute('onclick').includes("'" + sectionId + "'")) {
+                if (tab.getAttribute('onclick') && tab.getAttribute('onclick').includes(`'${sectionId}'`)) {
                     tab.classList.add('active');
                 }
             }
 
-            currentSection = sectionId;
-
-            if (sectionId === 'exercise1') initFillBlank();
-            if (sectionId === 'exercise2') initMCQ();
-            if (sectionId === 'matching') initMatching();
-            if (sectionId === 'dragdrop') initDragDrop();
+            // Start matching timer only when the tab is visited for the first time
+            if (sectionId === 'matching' && !matchingInitialized) {
+                initMatching();
+                matchingInitialized = true;
+            }
         }
 
         function updateScore(points) {
@@ -1008,8 +1013,8 @@
                 container.innerHTML = `
                     <div class="exercise-container completion-msg">
                         <h2>🎉 Congratulations! - مبروك!</h2>
-                        <p>You completed all questions!<br><span class="arabic">أكملت جميع الأسئلة!</span></p>
-                        <button class="check-btn" onclick="initFillBlank()">Try Again - حاول مرة أخرى</button>
+                        <p>You completed all 20 questions!<br><span class="arabic">أكملت جميع الـ 20 سؤالاً!</span></p>
+                        <button class="check-btn" onclick="initFillBlank()">Play Again - العب مرة أخرى</button>
                     </div>
                 `;
                 return;
@@ -1082,8 +1087,8 @@
                 container.innerHTML = `
                     <div class="exercise-container completion-msg">
                         <h2>🎉 Great Job! - عمل رائع!</h2>
-                        <p>You completed all multiple choice questions!<br><span class="arabic">أكملت جميع أسئلة الاختيار من متعدد!</span></p>
-                        <button class="check-btn" onclick="initMCQ()">Try Again - حاول مرة أخرى</button>
+                        <p>You completed all 20 multiple choice questions!<br><span class="arabic">أكملت جميع أسئلة الاختيار من متعدد الـ 20!</span></p>
+                        <button class="check-btn" onclick="initMCQ()">Play Again - العب مرة أخرى</button>
                     </div>
                 `;
                 return;
@@ -1148,11 +1153,9 @@
             const enItems = shuffled.map((p, i) => ({ text: p.en, type: 'en', pair: i }));
             const arItems = shuffled.map((p, i) => ({ text: p.ar, type: 'ar', pair: i }));
 
-            // Shuffle both separately
             const shuffledEn = [...enItems].sort(() => Math.random() - 0.5);
             const shuffledAr = [...arItems].sort(() => Math.random() - 0.5);
 
-            // Interleave them
             const allItems = [];
             for (let i = 0; i < shuffledEn.length; i++) {
                 allItems.push(shuffledEn[i]);
@@ -1176,7 +1179,7 @@
                 if (timerEl) timerEl.textContent = `Time: ${matchingTime}s`;
                 if (matchingTime <= 0) {
                     clearInterval(matchingTimerInterval);
-                    game.innerHTML = `<div style="grid-column: 1/-1; text-align: center; font-size: 1.5rem;">⏰ Time's up! - انتهى الوقت!<br><button class="check-btn" onclick="initMatching()" style="margin-top:1rem;">Try Again</button></div>`;
+                    game.innerHTML = `<div style="grid-column: 1/-1; text-align: center; font-size: 1.5rem;">⏰ Time is up! - انتهى الوقت!<br><button class="check-btn" onclick="initMatching()" style="margin-top:1rem;">Try Again</button></div>`;
                 }
             }, 1000);
         }
