@@ -869,7 +869,7 @@
         let matchingTime = 60;
         let matchingTimerInterval;
 
-        // Data - using only: in, on, under, behind, at, to, for, about, with
+        // Data - Expanded to 20 questions
         const fillBlankQuestions = [
             { sentence: "The cat is ___ the box.", answer: "in", hint: "داخل", arabic: "القطة في الصندوق" },
             { sentence: "The book is ___ the table.", answer: "on", hint: "على", arabic: "الكتاب على الطاولة" },
@@ -880,9 +880,20 @@
             { sentence: "This gift is ___ you.", answer: "for", hint: "لأجل", arabic: "هذه الهدية لك" },
             { sentence: "We talked ___ the lesson.", answer: "about", hint: "حول", arabic: "تحدثنا عن الدرس" },
             { sentence: "I study ___ my friend.", answer: "with", hint: "مع", arabic: "أدرس مع صديقي" },
-            { sentence: "The picture is ___ the wall.", answer: "on", hint: "على", arabic: "الصورة على الحائط" }
+            { sentence: "The picture is ___ the wall.", answer: "on", hint: "على", arabic: "الصورة على الحائط" },
+            { sentence: "The keys are ___ the table.", answer: "on", hint: "على", arabic: "المفاتيح على الطاولة." },
+            { sentence: "We are swimming ___ the pool.", answer: "in", hint: "في / داخل", arabic: "نحن نسبح في المسبح." },
+            { sentence: "He hid ___ the door.", answer: "behind", hint: "خلف", arabic: "اختبأ خلف الباب." },
+            { sentence: "The shoes are ___ the bed.", answer: "under", hint: "تحت", arabic: "الأحذية تحت السرير." },
+            { sentence: "I will meet you ___ the station.", answer: "at", hint: "في (مكان)", arabic: "سأقابلك في المحطة." },
+            { sentence: "She gave the apple ___ her teacher.", answer: "to", hint: "إلى", arabic: "أعطت التفاحة لمعلمتها." },
+            { sentence: "This cake is ___ my brother.", answer: "for", hint: "لأجل", arabic: "هذه الكعكة لأخي." },
+            { sentence: "What are you talking ___?", answer: "about", hint: "عن / حول", arabic: "عمّ تتحدث؟" },
+            { sentence: "I want to go ___ you.", answer: "with", hint: "مع", arabic: "أريد الذهاب معك." },
+            { sentence: "There is a spider ___ the ceiling.", answer: "on", hint: "على", arabic: "يوجد عنكبوت على السقف." }
         ];
 
+        // Expanded to 20 questions
         const mcqQuestions = [
             { question: "Where is the ball? It is ___ the box.", options: ["in", "on", "under", "behind"], answer: "in", arabic: "أين الكرة؟ إنها في الصندوق." },
             { question: "The cat is sleeping ___ the bed.", options: ["in", "on", "under", "at"], answer: "on", arabic: "القطة تنام على السرير." },
@@ -893,7 +904,17 @@
             { question: "We talked ___ the lesson.", options: ["for", "with", "about", "to"], answer: "about", arabic: "تحدثنا عن الدرس." },
             { question: "I go ___ school every day.", options: ["to", "for", "at", "in"], answer: "to", arabic: "أذهب إلى المدرسة كل يوم." },
             { question: "I wake up ___ 7 o'clock.", options: ["in", "on", "at", "for"], answer: "at", arabic: "أستيقظ في الساعة السابعة." },
-            { question: "The dog is ___ the table.", options: ["in", "on", "under", "at"], answer: "under", arabic: "الكلب تحت الطاولة." }
+            { question: "The dog is ___ the table.", options: ["in", "on", "under", "at"], answer: "under", arabic: "الكلب تحت الطاولة." },
+            { question: "They live ___ Paris.", options: ["in", "on", "at", "to"], answer: "in", arabic: "هم يعيشون في باريس." },
+            { question: "My birthday is ___ May.", options: ["in", "on", "at", "for"], answer: "in", arabic: "عيد ميلادي في شهر مايو." },
+            { question: "The train arrives ___ 5:30 PM.", options: ["in", "on", "at", "with"], answer: "at", arabic: "يصل القطار في الساعة 5:30 مساءً." },
+            { question: "She is looking ___ the picture.", options: ["to", "out of", "at", "in"], answer: "at", arabic: "هي تنظر إلى الصورة." },
+            { question: "I am walking ___ the park.", options: ["to", "for", "about", "with"], answer: "to", arabic: "أنا أمشي إلى الحديقة." },
+            { question: "He is famous ___ his paintings.", options: ["to", "for", "about", "in"], answer: "for", arabic: "إنه مشهور بلوحاته." },
+            { question: "Are you angry ___ me?", options: ["to", "with", "about", "in"], answer: "with", arabic: "هل أنت غاضب مني؟" },
+            { question: "Tell me a story ___ dragons.", options: ["to", "for", "about", "in"], answer: "about", arabic: "أخبرني قصة عن التنانين." },
+            { question: "The cat is hiding ___ the sofa.", options: ["on", "under", "to", "for"], answer: "under", arabic: "القطة تختبئ تحت الأريكة." },
+            { question: "Someone is standing ___ you.", options: ["in", "behind", "to", "for"], answer: "behind", arabic: "شخص ما يقف خلفك." }
         ];
 
         const matchingPairs = [
@@ -1155,7 +1176,6 @@
                 if (timerEl) timerEl.textContent = `Time: ${matchingTime}s`;
                 if (matchingTime <= 0) {
                     clearInterval(matchingTimerInterval);
-                    // FIXED LINE: Used template literal backticks so the single quote in "Time's up!" doesn't break the string.
                     game.innerHTML = `<div style="grid-column: 1/-1; text-align: center; font-size: 1.5rem;">⏰ Time's up! - انتهى الوقت!<br><button class="check-btn" onclick="initMatching()" style="margin-top:1rem;">Try Again</button></div>`;
                 }
             }, 1000);
@@ -1295,9 +1315,6 @@
                 });
             });
         }
-
-        // Initialize fill blank on page load (for when user first opens exercise1)
-        // But don't auto-init, let the nav click handle it
     </script>
 </body>
 </html>
